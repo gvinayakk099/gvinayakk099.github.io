@@ -3,7 +3,7 @@
 
 <head>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-  <title>SUEZ multilayer</title>
+  <title>SUEZ multilayer github hosted</title>
   </script>
   <script>
     L_NO_TOUCH = false;
@@ -544,40 +544,15 @@
 
 
 
-  //FlowDirection
 
+  //FlowDirection
   function geoJSON_onEachFeature_Flow_Direction(feature, layer) {
     layer.setStyle({
       color: 'purple',
       opacity: 1,
       weight: 5
     })
-    layer.on('mouseover', function (event) {
-      layer.setStyle({
-        color: 'red',
-        opacity: 1
-      })
-    });
-    layer.on('mouseover', function (event) {
-      layer.bindPopup("<strong>Pipe Details:</strong>" + "<br>OBJECTID:" + feature.properties
-        .OBJECTID +
-        "<br>Diameter_m:" + feature.properties
-        .Diameter_m + "<br>Length_M:" + feature.properties.length_M + "<br>Pipe_Material:" +
-        feature
-        .properties
-        .Pipe_Mater + "<br>Type:" + feature.properties.Type_);
-    });
-    layer.on('mouseout', function (event) {
-      layer.setStyle({
-        color: 'purple',
-        opacity: 1
-      })
-    });
-    layer.on('mouseout', function (event) {
-      layer.closePopup()
-    });
   };
-
   var defaultParameters_FlowDirection = {
     service: 'WFS',
     version: '2.0',
@@ -602,30 +577,21 @@
   });
 
 
-  //FlowPoint
 
+  //FlowPoint
   function geoJSON_onEachFeature_Flow_Point(feature, layer) {
-    // layer.on('mouseover', function (event) {
-    //     layer.setStyle({
-    //         color: 'red',
-    //         opacity: 1
-    //     })
-    // });
-    layer.on('mouseover', function (event) {
-      layer.bindPopup("<strong>Pipe Details:</strong>" + "<br>OBJECTID:" + feature.properties
-        .OBJECTID +
-        "<br>Diameter_m:" + feature.properties
-        .Diameter_m + "<br>Length_M:" + feature.properties.length_M + "<br>Pipe_Material:" +
-        feature
-        .properties
-        .Pipe_Mater + "<br>Type:" + feature.properties.Type_);
+    layer.on('click', function (event) {
+      var msg = new SpeechSynthesisUtterance("This is a Flow point having Diameter" + feature.properties.Pipe_Dia +
+        "milimeters, located in ward Number" + feature.properties.Ward_No + "and DMA number" + feature.properties
+        .DMA);
+      window.speechSynthesis.speak(msg);
     });
-    // layer.on('mouseout', function (event) {
-    //     layer.setStyle({
-    //         color: 'black',
-    //         opacity: 1
-    //     })
-    // });
+    layer.on('mouseover', function (event) {
+      layer.bindPopup("<strong>Flow Point Details:</strong>" + "<br>Object ID: " + feature.properties.OBJECTID +
+        "<br>Pipe Diameter in mm: " + feature.properties.Pipe_Dia + "<br>Unique ID: " + feature.properties
+        .Unique_ID + "<br>Location: " + feature.properties.Location_i + "<br>DMA: " + feature.properties.DMA +
+        "<br>Ward No:" + feature.properties.Ward_No);
+    });
     layer.on('mouseout', function (event) {
       layer.closePopup()
     });
@@ -654,35 +620,25 @@
     }
   });
 
-  //IsolationValve
 
+
+  //IsolationValve
   function geoJSON_onEachFeature_Isolation_Valve(feature, layer) {
-    // layer.on('mouseover', function (event) {
-    //     layer.setStyle({
-    //         color: 'red',
-    //         opacity: 1
-    //     })
-    // });
-    layer.on('mouseover', function (event) {
-      layer.bindPopup("<strong>Pipe Details:</strong>" + "<br>OBJECTID:" + feature.properties
-        .OBJECTID +
-        "<br>Diameter_m:" + feature.properties
-        .Diameter_m + "<br>Length_M:" + feature.properties.length_M + "<br>Pipe_Material:" +
-        feature
-        .properties
-        .Pipe_Mater + "<br>Type:" + feature.properties.Type_);
+    layer.on('click', function (event) {
+      var msg = new SpeechSynthesisUtterance("This is an Isolation Valve of" + feature.properties.Valve_Type +
+        "type, located in zone ID" + feature.properties.ZONEID);
+      window.speechSynthesis.speak(msg);
     });
-    // layer.on('mouseout', function (event) {
-    //     layer.setStyle({
-    //         color: 'black',
-    //         opacity: 1
-    //     })
-    // });
+    layer.on('mouseover', function (event) {
+      layer.bindPopup("<strong>Isolation Valve Details:</strong>" + "<br>Object ID: " + feature.properties
+        .OBJECTID + "<br>Reference Pipe ID: " + feature.properties.REF_PIPEID + "<br>Refer Pipe: " + feature
+        .properties.REFER_PIPE + "<br>Zone ID: " + feature.properties.ZONEID + "<br>Valve Type: " + feature
+        .properties.Valve_Type);
+    });
     layer.on('mouseout', function (event) {
       layer.closePopup()
     });
   };
-
   var defaultParameters_IsolationValve = {
     service: 'WFS',
     version: '2.0',
@@ -706,35 +662,23 @@
     }
   });
 
-  //Junction
 
+
+  //Junction
   function geoJSON_onEachFeature_Junction(feature, layer) {
-    // layer.on('mouseover', function (event) {
-    //     layer.setStyle({
-    //         color: 'red',
-    //         opacity: 1
-    //     })
-    // });
-    layer.on('mouseover', function (event) {
-      layer.bindPopup("<strong>Pipe Details:</strong>" + "<br>OBJECTID:" + feature.properties
-        .OBJECTID +
-        "<br>Diameter_m:" + feature.properties
-        .Diameter_m + "<br>Length_M:" + feature.properties.length_M + "<br>Pipe_Material:" +
-        feature
-        .properties
-        .Pipe_Mater + "<br>Type:" + feature.properties.Type_);
+    layer.on('click', function (event) {
+      var msg = new SpeechSynthesisUtterance("This is a Junction in" + feature.properties.ZONE);
+      window.speechSynthesis.speak(msg);
     });
-    // layer.on('mouseout', function (event) {
-    //     layer.setStyle({
-    //         color: 'black',
-    //         opacity: 1
-    //     })
-    // });
+    layer.on('mouseover', function (event) {
+      layer.bindPopup("<strong>Junction Details:</strong>" + "<br>Object ID: " + feature.properties.OBJECTID +
+        "<br>ID: " + feature.properties.ID + "<br>Label: " + feature.properties.LABEL + "<br>Zone ID: " + feature
+        .properties.ZONEID + "<br>DMA: " + feature.properties.ZONE);
+    });
     layer.on('mouseout', function (event) {
       layer.closePopup()
     });
   };
-
   var defaultParameters_Junction = {
     service: 'WFS',
     version: '2.0',
@@ -758,8 +702,9 @@
     }
   });
 
-  //ParcelBoundary
 
+
+  //ParcelBoundary
   function geoJSON_onEachFeature_Parcel_Boundary(feature, layer) {
     layer.setStyle({
       color: 'brown',
@@ -772,14 +717,13 @@
         opacity: 1
       })
     });
+    layer.on('click', function (event) {
+      var msg = new SpeechSynthesisUtterance("This is a Parcel Boundary");
+      window.speechSynthesis.speak(msg);
+    });
     layer.on('mouseover', function (event) {
-      layer.bindPopup("<strong>Pipe Details:</strong>" + "<br>OBJECTID:" + feature.properties
-        .OBJECTID +
-        "<br>Diameter_m:" + feature.properties
-        .Diameter_m + "<br>Length_M:" + feature.properties.length_M + "<br>Pipe_Material:" +
-        feature
-        .properties
-        .Pipe_Mater + "<br>Type:" + feature.properties.Type_);
+      layer.bindPopup("<strong>Parcel Boundary Details:</strong>" + "<br>GIS ID: " + feature.properties.GISID +
+        "<br>Address: " + feature.properties.Address + "<br>Premises No: " + feature.properties.Premises_N);
     });
     layer.on('mouseout', function (event) {
       layer.setStyle({
@@ -791,7 +735,6 @@
       layer.closePopup()
     });
   };
-
   var defaultParameters_parcelboundary = {
     service: 'WFS',
     version: '2.0',
@@ -815,8 +758,9 @@
     }
   });
 
-  //Pipe
 
+
+  //Pipe
   function geoJSON_onEachFeature_Pipe(feature, layer) {
     layer.setStyle({
       color: 'navy',
@@ -829,14 +773,17 @@
         opacity: 1
       })
     });
+    layer.on('click', function (event) {
+      var msg = new SpeechSynthesisUtterance("This is a Pipe having Diameter" + feature.properties.D +
+        "milimeters and length" + feature.properties.L + "meters. The Material of the pipe is" + feature
+        .properties.MATERIAL);
+      window.speechSynthesis.speak(msg);
+    });
     layer.on('mouseover', function (event) {
-      layer.bindPopup("<strong>Pipe Details:</strong>" + "<br>OBJECTID:" + feature.properties
-        .OBJECTID +
-        "<br>Diameter_m:" + feature.properties
-        .Diameter_m + "<br>Length_M:" + feature.properties.length_M + "<br>Pipe_Material:" +
-        feature
-        .properties
-        .Pipe_Mater + "<br>Type:" + feature.properties.Type_);
+      layer.bindPopup("<strong>Pipe Details:</strong>" + "<br>OBJECTID: " + feature.properties.OBJECTID +
+        "<br>Diameter in mm: " + feature.properties.D + "<br>Length in meters: " + feature.properties.L +
+        "<br>DMA: " + feature.properties.ZONE + "<br>ID: " + feature.properties.ID + "<br>Label" + feature
+        .properties.LABEL + "<br>Material: " + feature.properties.MATERIAL);
     });
     layer.on('mouseout', function (event) {
       layer.setStyle({
@@ -848,7 +795,6 @@
       layer.closePopup()
     });
   };
-
   var defaultParameters_Pipe = {
     service: 'WFS',
     version: '2.0',
@@ -872,35 +818,26 @@
     }
   });
 
-  //PressurePoint
 
+
+  //PressurePoint
   function geoJSON_onEachFeature_Pressure_Point(feature, layer) {
-    // layer.on('mouseover', function (event) {
-    //     layer.setStyle({
-    //         color: 'red',
-    //         opacity: 1
-    //     })
-    // });
-    layer.on('mouseover', function (event) {
-      layer.bindPopup("<strong>Pipe Details:</strong>" + "<br>OBJECTID:" + feature.properties
-        .OBJECTID +
-        "<br>Diameter_m:" + feature.properties
-        .Diameter_m + "<br>Length_M:" + feature.properties.length_M + "<br>Pipe_Material:" +
-        feature
-        .properties
-        .Pipe_Mater + "<br>Type:" + feature.properties.Type_);
+    layer.on('click', function (event) {
+      var msg = new SpeechSynthesisUtterance("This is a Pressure Point in DMA" + feature.properties.DMA +
+        "and Ward number" + feature.properties.Ward + ".The Material of the pipe is" + feature.properties
+        .pipe_mater);
+      window.speechSynthesis.speak(msg);
     });
-    // layer.on('mouseout', function (event) {
-    //     layer.setStyle({
-    //         color: 'black',
-    //         opacity: 1
-    //     })
-    // });
+    layer.on('mouseover', function (event) {
+      layer.bindPopup("<strong>Pressure Point Details:</strong>" + "<br>OBJECTID: " + feature.properties.OBJECTID +
+        "<br>Location: " + feature.properties.location_d + "<br>ID: " + feature.properties.id + "<br>DMA: " +
+        feature.properties.DMA + "<br>Ward No: " + feature.properties.Ward + "<br>Pipe Material: " + feature
+        .properties.pipe_mater + "<br>External Pipe Condition: " + feature.properties.external_p);
+    });
     layer.on('mouseout', function (event) {
       layer.closePopup()
     });
   };
-
   var defaultParameters_PressurePoint = {
     service: 'WFS',
     version: '2.0',
@@ -924,35 +861,25 @@
     }
   });
 
-  //iFittings
 
+
+  //iFittings
   function geoJSON_onEachFeature_iFittings(feature, layer) {
-    // layer.on('mouseover', function (event) {
-    //     layer.setStyle({
-    //         color: 'red',
-    //         opacity: 1
-    //     })
-    // });
-    layer.on('mouseover', function (event) {
-      layer.bindPopup("<strong>Pipe Details:</strong>" + "<br>OBJECTID:" + feature.properties
-        .OBJECTID +
-        "<br>Diameter_m:" + feature.properties
-        .Diameter_m + "<br>Length_M:" + feature.properties.length_M + "<br>Pipe_Material:" +
-        feature
-        .properties
-        .Pipe_Mater + "<br>Type:" + feature.properties.Type_);
+    layer.on('click', function (event) {
+      var msg = new SpeechSynthesisUtterance("This is an ifitting of Diameter" + feature.properties.Diameter +
+        "milimeters and fitting type is " + feature.properties.Fitting_Ty + ".The Material of the pipe is" +
+        feature.properties.Material);
+      window.speechSynthesis.speak(msg);
     });
-    // layer.on('mouseout', function (event) {
-    //     layer.setStyle({
-    //         color: 'black',
-    //         opacity: 1
-    //     })
-    // });
+    layer.on('mouseover', function (event) {
+      layer.bindPopup("<strong>iFitting Details:</strong>" + "<br>OBJECTID: " + feature.properties.OBJECTID +
+        "<br>Diameter in mm: " + feature.properties.Diameter + "<br>material: " + feature.properties.Material +
+        "<br>Fitting Type: " + feature.properties.Fitting_Ty + "<br>DMA: " + feature.properties.DMA);
+    });
     layer.on('mouseout', function (event) {
       layer.closePopup()
     });
   };
-
   var defaultParameters_iFittings = {
     service: 'WFS',
     version: '2.0',
@@ -976,8 +903,9 @@
     }
   });
 
-  //iHscLine
 
+
+  //iHscLine
   function geoJSON_onEachFeature_iHscLine(feature, layer) {
     layer.setStyle({
       color: 'olive',
@@ -990,14 +918,17 @@
         opacity: 1
       })
     });
+    layer.on('click', function (event) {
+      var msg = new SpeechSynthesisUtterance("This is an i HSC line of Diameter" + feature.properties.Diameter +
+        "milimeters and length " + feature.properties.Diameter + ".The Material of the pipe is" + feature
+        .properties.Material);
+      window.speechSynthesis.speak(msg);
+    });
     layer.on('mouseover', function (event) {
-      layer.bindPopup("<strong>Pipe Details:</strong>" + "<br>OBJECTID:" + feature.properties
-        .OBJECTID +
-        "<br>Diameter_m:" + feature.properties
-        .Diameter_m + "<br>Length_M:" + feature.properties.length_M + "<br>Pipe_Material:" +
-        feature
-        .properties
-        .Pipe_Mater + "<br>Type:" + feature.properties.Type_);
+      layer.bindPopup("<strong>iHSCline Details:</strong>" + "<br>OBJECTID: " + feature.properties.OBJECTID +
+        "<br>Diameter in mm: " + feature.properties.Diameter + "<br>Length: " + feature.properties.Length +
+        "<br>Material: " + feature.properties.Material + "<br>Category: " + feature.properties.Category +
+        "<br>DMA: " + feature.properties.DMA);
     });
     layer.on('mouseout', function (event) {
       layer.setStyle({
@@ -1009,7 +940,6 @@
       layer.closePopup()
     });
   };
-
   var defaultParameters_iHscLine = {
     service: 'WFS',
     version: '2.0',
@@ -1033,35 +963,28 @@
     }
   });
 
-  //iMeter
 
+
+  //iMeter
   function geoJSON_onEachFeature_iMeter(feature, layer) {
-    // layer.on('mouseover', function (event) {
-    //     layer.setStyle({
-    //         color: 'red',
-    //         opacity: 1
-    //     })
-    // });
-    layer.on('mouseover', function (event) {
-      layer.bindPopup("<strong>Pipe Details:</strong>" + "<br>OBJECTID:" + feature.properties
-        .OBJECTID +
-        "<br>Diameter_m:" + feature.properties
-        .Diameter_m + "<br>Length_M:" + feature.properties.length_M + "<br>Pipe_Material:" +
-        feature
-        .properties
-        .Pipe_Mater + "<br>Type:" + feature.properties.Type_);
+    layer.on('click', function (event) {
+      var msg = new SpeechSynthesisUtterance("This is an i meter of " + feature.properties.Con_Type +
+        "Connection type and " + feature.properties.Con_Catego + "Connection category and meter size " + feature
+        .properties.Meter_Size);
+      window.speechSynthesis.speak(msg);
     });
-    // layer.on('mouseout', function (event) {
-    //     layer.setStyle({
-    //         color: 'black',
-    //         opacity: 1
-    //     })
-    // });
+    layer.on('mouseover', function (event) {
+      layer.bindPopup("<strong>iMeter Details:</strong>" + "<br>OBJECTID: " + feature.properties.OBJECTID +
+        "<br>Account: " + feature.properties.Account + "<br>Consumer Name: " + feature.properties.Consumer_N +
+        "<br>Connection Type: " + feature.properties.Con_Type + "<br>Connection Category: " + feature.properties
+        .Con_Catego + "<br>Meter No: " + feature.properties.Meter_No + "<br>Meter Size: " + feature.properties
+        .Meter_Size + "<br>Reference GIS ID: " + feature.properties.Ref_GISID + "<br>Location: " + feature
+        .properties.Location);
+    });
     layer.on('mouseout', function (event) {
       layer.closePopup()
     });
   };
-
   var defaultParameters_iMeter = {
     service: 'WFS',
     version: '2.0',
@@ -1085,35 +1008,26 @@
     }
   });
 
-  //iValve
 
+
+  //iValve
   function geoJSON_onEachFeature_iValve(feature, layer) {
-    // layer.on('mouseover', function (event) {
-    //     layer.setStyle({
-    //         color: 'red',
-    //         opacity: 1
-    //     })
-    // });
-    layer.on('mouseover', function (event) {
-      layer.bindPopup("<strong>Pipe Details:</strong>" + "<br>OBJECTID:" + feature.properties
-        .OBJECTID +
-        "<br>Diameter_m:" + feature.properties
-        .Diameter_m + "<br>Length_M:" + feature.properties.length_M + "<br>Pipe_Material:" +
-        feature
-        .properties
-        .Pipe_Mater + "<br>Type:" + feature.properties.Type_);
+    layer.on('click', function (event) {
+      var msg = new SpeechSynthesisUtterance("This is an i valve of " + feature.properties.Valve_Type +
+        "type having diameter " + feature.properties.Diameter + "milimeters. The Material of the valve is " +
+        feature.properties.Material);
+      window.speechSynthesis.speak(msg);
     });
-    // layer.on('mouseout', function (event) {
-    //     layer.setStyle({
-    //         color: 'black',
-    //         opacity: 1
-    //     })
-    // });
+    layer.on('mouseover', function (event) {
+      layer.bindPopup("<strong>iValve Details:</strong>" + "<br>OBJECTID: " + feature.properties.OBJECTID +
+        "<br>Valve Type: " + feature.properties.Valve_Type + "<br>Diameter in mm: " + feature.properties
+        .Valve_Type + "<br>Material: " + feature.properties.Material + "<br>Installation Data: " + feature
+        .properties.Install_Da + "<br>Label: " + feature.properties.Label);
+    });
     layer.on('mouseout', function (event) {
       layer.closePopup()
     });
   };
-
   var defaultParameters_iValve = {
     service: 'WFS',
     version: '2.0',
